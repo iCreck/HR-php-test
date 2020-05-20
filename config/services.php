@@ -1,7 +1,6 @@
 <?php
 
 return [
-
     /*
     |--------------------------------------------------------------------------
     | Third Party Services
@@ -35,4 +34,10 @@ return [
         'secret' => env('STRIPE_SECRET'),
     ],
 
+    'yandex' => [
+        'weather' => [
+            'apiKey' => env('YANDEX_WEATHER_API_KEY'),
+            'paid' => env('YANDEX_WEATHER_API_PAID', false),
+        ],
+    ],
 ];
