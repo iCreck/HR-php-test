@@ -37,7 +37,7 @@ export default {
       const lang = 'ru_RU';
 
       const response = await axios.get(
-        `weather?lat=${lat}&lon=${lon}&lang=${lang}`,
+        `/api/weather?lat=${lat}&lon=${lon}&lang=${lang}`,
       );
       commit('loadWeather', new Weather(response.data));
     },

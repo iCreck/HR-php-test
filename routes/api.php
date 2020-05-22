@@ -13,6 +13,6 @@ use Illuminate\Http\Request;
 |
 */
 
-//Route::middleware('auth:api')->get('/user', function (Request $request) {
-//    return $request->user();
-//});
+Route::get('weather', 'WeatherController@getWeather')->name('weather.get');
+Route::resource('orders', 'OrdersController');
+Route::resource('products', 'ProductsController')->only(['index', 'update']);

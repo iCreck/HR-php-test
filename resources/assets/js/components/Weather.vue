@@ -43,8 +43,8 @@
       </b-card>
       <div class="text-center">
         <b-spinner
-            v-if="!hasWeather"
-            style="width: 3rem; height: 3rem;"
+          v-if="!hasWeather"
+          style="width: 3rem; height: 3rem;"
         />
       </div>
     </b-col>

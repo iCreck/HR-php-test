@@ -1,7 +1,8 @@
 import Vue from 'vue';
 import Router from 'vue-router';
-import Weather from "../components/Weather";
-import Orders from "../components/Orders";
+import Weather from '../components/Weather';
+import Orders from '../components/Orders';
+import Products from '../components/Products';
 
 Vue.use(Router);
 
@@ -15,8 +16,18 @@ export default new Router({
     {
       path: '/orders',
       name: 'orders',
-      component: Orders
-    }
+      component: Orders,
+    },
+    {
+      path: '/products/page/:page',
+      name: 'products',
+      component: Products,
+      props: true,
+    },
+    {
+      path: '*',
+      redirect: '/',
+    },
   ],
   mode: 'history',
 });

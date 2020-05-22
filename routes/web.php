@@ -11,8 +11,6 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
-Route::get('weather', 'WeatherController@getWeather')->name('weather.get');
+Route::get('/{any}', function () {
+    return view('index');
+})->where('any', '.*');
