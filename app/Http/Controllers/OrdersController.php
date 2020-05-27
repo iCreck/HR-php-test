@@ -15,7 +15,11 @@ class OrdersController extends Controller
     public function index()
     {
         //        dd(Order::first());
-        return response()->json(Order::with('partner')->get());
+        return response()->json(
+            Order::with(['partner', 'items'])
+                ->take(20)
+                ->get()
+        );
     }
 
     /**

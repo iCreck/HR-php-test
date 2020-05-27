@@ -12,17 +12,28 @@ class Order extends Model
         20 => 'Завершен',
     ];
 
+    protected $appends = ['total'];
+
     public function partner()
     {
         return $this->belongsTo(Partner::class)->select(['name', 'id']);
     }
 
-    public function products()
+    public function items()
     {
+        return $this->hasMany(OrderProduct::class);
     }
 
     public function getStatusAttribute($status)
     {
         return self::STATUS[$status];
+    }
+
+    public function getTotalAttribute()
+    {
+        $sums = $this->items->map(function ($item) {
+            return $item->quantity * $item->price;
+        });
+        return $sums->sum();
     }
 }

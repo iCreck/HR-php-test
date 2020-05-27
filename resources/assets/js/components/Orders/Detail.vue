@@ -1,25 +1,35 @@
 <template>
   <b-card>
-    <b-row class="mb-2">
-      <b-col sm="3" class="text-sm-right">
-        <b>Age:</b>
-      </b-col>
-      <b-col>{{ item.age }}</b-col>
-    </b-row>
-
-    <b-row class="mb-2">
-      <b-col sm="3" class="text-sm-right">
-        <b>Is Active:</b>
-      </b-col>
-      <b-col>{{ item.isActive }}</b-col>
-    </b-row>
+    <b-table :items="items" :fields="fields" striped bordered responsive="sm" />
   </b-card>
 </template>
 
 <script>
 export default {
   name: 'Detail',
-  props: ['item'],
+  props: ['items'],
+  data() {
+    return {
+      fields: [
+        {
+          key: 'id',
+          label: 'ID',
+        },
+        {
+          key: 'name',
+          label: 'Название',
+        },
+        {
+          key: 'price',
+          label: 'Цена',
+        },
+        {
+          key: 'quantity',
+          label: 'Кол-во в заказе',
+        },
+      ],
+    };
+  },
 };
 </script>
 
