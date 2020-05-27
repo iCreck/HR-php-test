@@ -28,18 +28,10 @@ export default {
       const response = await axios.get(`/api/products?page=${page}`);
       const products = response.data.data;
 
-      const resultProducts = [];
-      Object.keys(products).forEach(key => {
-        const product = products[key];
-        resultProducts.push(
-          new Product(
-            product.id,
-            product.name,
-            product.vendor.name,
-            product.price,
-          ),
-        );
-      });
+      const resultProducts = products.map(
+        ({ id, name, vendor, price }) =>
+          new Product(id, name, vendor.name, price),
+      );
       commit('setProducts', resultProducts);
       commit('setTotalPages', response.data.last_page);
     },
