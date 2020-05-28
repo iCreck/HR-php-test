@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <b-overlay :show="overlay" rounded="sm">
     <b-card v-if="hasOrder">
       <h1>Заказ #{{ id }}</h1>
       <b-form @submit="onSubmit">
@@ -59,7 +59,7 @@
     <div class="text-center">
       <b-spinner v-if="!hasOrder" style="width: 3rem; height: 3rem;" />
     </div>
-  </div>
+  </b-overlay>
 </template>
 
 <script>
@@ -74,6 +74,7 @@ export default {
   props: ['id'],
   data() {
     return {
+      overlay: false,
       statuses: [
         { value: 0, text: 'Новый' },
         { value: 10, text: 'Подтвержден' },
@@ -113,7 +114,11 @@ export default {
     ...mapActions('partners', ['fetchPartners']),
     onSubmit(event) {
       event.preventDefault();
+      this.overlay = !this.overlay;
       this.updateOrder(this.form);
+      setTimeout(() => {
+        this.overlay = !this.overlay;
+      }, 500);
     },
   },
 };

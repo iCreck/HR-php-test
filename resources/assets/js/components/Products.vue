@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div>
+    <b-overlay :show="overlay" rounded="sm">
       <b-table
         v-if="hasProducts"
         striped
@@ -16,7 +16,7 @@
               size="sm"
               type="number"
               placeholder="Введите цену"
-              @blur="changePrice(data.item)"
+              @blur="updatePrice(data.item)"
             />
           </b-col>
         </template>
@@ -28,7 +28,7 @@
           use-router
         />
       </div>
-    </div>
+    </b-overlay>
     <div class="text-center">
       <b-spinner v-if="!hasProducts" style="width: 3rem; height: 3rem;" />
     </div>
@@ -43,6 +43,7 @@ export default {
   props: ['page'],
   data() {
     return {
+      overlay: false,
       fields: [
         {
           key: 'id',
@@ -79,6 +80,13 @@ export default {
   },
   methods: {
     ...mapActions('products', ['fetchProducts', 'changePrice']),
+    updatePrice(price) {
+      this.overlay = !this.overlay;
+      this.changePrice(price);
+      setTimeout(() => {
+        this.overlay = !this.overlay;
+      }, 500);
+    },
     linkGen(pageNum) {
       return `/products/page/${pageNum}`;
     },

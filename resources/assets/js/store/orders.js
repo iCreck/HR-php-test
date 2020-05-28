@@ -74,7 +74,6 @@ export default {
       commit('setOrder', resultOrders[0]);
     },
     async updateOrder({ commit }, payload) {
-      console.log(payload);
       const response = await axios.patch(`/api/orders/${payload.id}`, payload);
       const orders = [response.data];
       const resultOrders = orders.map(
