@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Collection;
 
 class Order extends Model
 {
@@ -11,6 +12,8 @@ class Order extends Model
         10 => 'Подтвержден',
         20 => 'Завершен',
     ];
+
+    protected $fillable = ['client_email', 'partner_id', 'status'];
 
     protected $appends = ['total'];
 
@@ -26,14 +29,13 @@ class Order extends Model
 
     public function getStatusAttribute($status)
     {
-        return self::STATUS[$status];
+        return ['value' => $status, 'text' => self::STATUS[$status]];
     }
 
     public function getTotalAttribute()
     {
-        $sums = $this->items->map(function ($item) {
-            return $item->quantity * $item->price;
+        return $this->items->reduce(function ($carry, $item) {
+            return $carry + $item->quantity * $item->price;
         });
-        return $sums->sum();
     }
 }

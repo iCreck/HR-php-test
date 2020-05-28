@@ -16,3 +16,4 @@ use Illuminate\Http\Request;
 Route::get('weather', 'WeatherController@getWeather')->name('weather.get');
 Route::resource('orders', 'OrdersController');
 Route::resource('products', 'ProductsController')->only(['index', 'update']);
+Route::resource('partners', 'PartnersController')->only(['index']);

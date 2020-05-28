@@ -82,9 +82,6 @@ export default {
     linkGen(pageNum) {
       return `/products/page/${pageNum}`;
     },
-    toggleBusy() {
-      this.isBusy = !this.isBusy;
-    },
   },
 };
 </script>

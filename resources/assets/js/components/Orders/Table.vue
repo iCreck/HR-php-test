@@ -8,6 +8,11 @@
       bordered
       responsive="sm"
     >
+      <template #cell(id)="row">
+        <b-link :to="'orders/' + row.item.id">
+          {{ row.item.id }}
+        </b-link>
+      </template>
       <template #cell(showItems)="row">
         <b-button size="sm" class="mr-2" @click="row.toggleDetails">
           {{ row.detailsShowing ? 'Скрыть' : 'Показать' }} состав заказа
@@ -41,7 +46,7 @@ export default {
           label: 'ID',
         },
         {
-          key: 'partnerName',
+          key: 'partner.name',
           label: 'Название партнера',
         },
         {
@@ -53,7 +58,7 @@ export default {
           label: 'Состав заказа',
         },
         {
-          key: 'status',
+          key: 'status.text',
           label: 'Статус заказа',
         },
       ],

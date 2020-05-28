@@ -3,6 +3,7 @@ import Router from 'vue-router';
 import Weather from '../components/Weather';
 import Orders from '../components/Orders';
 import Products from '../components/Products';
+import Edit from '../components/Orders/Edit';
 
 Vue.use(Router);
 
@@ -17,6 +18,12 @@ export default new Router({
       path: '/orders',
       name: 'orders',
       component: Orders,
+    },
+    {
+      path: '/orders/:id',
+      name: 'editOrder',
+      component: Edit,
+      props: true,
     },
     {
       path: '/products/page/:page',
