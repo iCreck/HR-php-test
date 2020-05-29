@@ -43,7 +43,6 @@ export default {
   props: ['page'],
   data() {
     return {
-      overlay: false,
       fields: [
         {
           key: 'id',
@@ -65,7 +64,12 @@ export default {
     };
   },
   computed: {
-    ...mapGetters('products', ['products', 'totalPages']),
+    ...mapGetters({
+      products: 'products/products',
+      totalPages: 'products/totalPages',
+      overlay: 'common/overlay',
+    }),
+    // ...mapGetters('products', ['products', 'totalPages']),
     hasProducts() {
       return this.products.length > 0;
     },
@@ -80,12 +84,11 @@ export default {
   },
   methods: {
     ...mapActions('products', ['fetchProducts', 'changePrice']),
+    ...mapActions('common', ['setOverlay']),
     updatePrice(price) {
-      this.overlay = !this.overlay;
+      this.setOverlay({ value: true, timeout: 0 });
       this.changePrice(price);
-      setTimeout(() => {
-        this.overlay = !this.overlay;
-      }, 500);
+      this.setOverlay({ value: false, timeout: 500 });
     },
     linkGen(pageNum) {
       return `/products/page/${pageNum}`;

@@ -74,7 +74,6 @@ export default {
   props: ['id'],
   data() {
     return {
-      overlay: false,
       statuses: [
         { value: 0, text: 'Новый' },
         { value: 10, text: 'Подтвержден' },
@@ -90,8 +89,11 @@ export default {
     };
   },
   computed: {
-    ...mapGetters('orders', ['orderById']),
-    ...mapGetters('partners', ['partners']),
+    ...mapGetters({
+      orderById: 'orders/orderById',
+      partners: 'partners/partners',
+      overlay: 'common/overlay',
+    }),
     hasOrder() {
       return this.orderById.id > 0 && this.partners;
     },
@@ -112,13 +114,12 @@ export default {
   methods: {
     ...mapActions('orders', ['fetchOrderById', 'updateOrder']),
     ...mapActions('partners', ['fetchPartners']),
+    ...mapActions('common', ['setOverlay']),
     onSubmit(event) {
       event.preventDefault();
-      this.overlay = !this.overlay;
+      this.setOverlay({ value: true, timeout: 0 });
       this.updateOrder(this.form);
-      setTimeout(() => {
-        this.overlay = !this.overlay;
-      }, 500);
+      this.setOverlay({ value: false, timeout: 500 });
     },
   },
 };
