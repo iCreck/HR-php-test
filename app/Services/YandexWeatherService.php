@@ -6,19 +6,18 @@ use App\Models\Weather;
 use GuzzleHttp\Client;
 
 /**
- * Class YandexWeatherService
- * @package App\Services
+ * Class YandexWeatherService.
  */
 class YandexWeatherService
 {
     /**
-     * Корневой URL API погоды
+     * Корневой URL API погоды.
      * @var string
      */
     const API_URI = 'https://api.weather.yandex.ru/v1/';
 
     /**
-     * Метод для платного тарифа
+     * Метод для платного тарифа.
      * @link https://yandex.ru/dev/weather/doc/dg/concepts/forecast-test-docpage/
      *
      * @var string
@@ -26,7 +25,7 @@ class YandexWeatherService
     const API_PAID_METHOD = 'forecast';
 
     /**
-     * Метод для бесплатного тарифа (50 запросов в день)
+     * Метод для бесплатного тарифа (50 запросов в день).
      * @link https://yandex.ru/dev/weather/doc/dg/concepts/forecast-info-docpage/
      *
      * @var string
@@ -34,14 +33,14 @@ class YandexWeatherService
     const API_FREE_METHOD = 'informers';
 
     /**
-     * Вызываемый метод API
+     * Вызываемый метод API.
      *
      * @var string
      */
     private $method;
 
     /**
-     * Ключ API
+     * Ключ API.
      * @link https://yandex.ru/dev/weather/doc/dg/concepts/about-docpage/
      *
      * @var string
@@ -49,7 +48,7 @@ class YandexWeatherService
     private $apiKey;
 
     /**
-     * GuzzleHttp Client
+     * GuzzleHttp Client.
      *
      * @var Client
      */
@@ -57,7 +56,6 @@ class YandexWeatherService
 
     /**
      * YandexWeatherService constructor.
-     *
      */
     public function __construct()
     {
@@ -89,8 +87,10 @@ class YandexWeatherService
         ]);
         if ($response->getStatusCode() === 200) {
             $responseJson = json_decode($response->getBody()->getContents());
+
             return new Weather($responseJson);
         }
+
         return ['error' => $response->getReasonPhrase()];
     }
 }

@@ -24,7 +24,7 @@ class Update extends FormRequest
     public function rules()
     {
         return [
-            'price' => 'bail|required|integer'
+            'price' => 'bail|required|integer',
         ];
     }
 }

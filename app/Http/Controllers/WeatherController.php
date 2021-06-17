@@ -34,6 +34,7 @@ class WeatherController extends Controller
                 )
             );
         }
+
         return response()->json(['error' => 'No params'], 204);
     }
 }
