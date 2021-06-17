@@ -48,6 +48,7 @@ class OrdersController extends Controller
             'partner_id' => $request->get('partnerId'),
             'status' => $request->get('status'),
         ]);
+
         return response()->json($order->fresh(['partner', 'items']));
     }
 

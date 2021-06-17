@@ -3,13 +3,12 @@
 namespace App\Models;
 
 /**
- * Class Weather
- * @package App\Models
+ * Class Weather.
  */
 class Weather
 {
     /**
-     * Расшифровка состояний
+     * Расшифровка состояний.
      */
     const CONDITIONS = [
         'clear' => 'ясно',
@@ -33,7 +32,7 @@ class Weather
     ];
 
     /**
-     * Расшифровка направления ветра
+     * Расшифровка направления ветра.
      */
     const WIND_DIRECTIONS = [
         'nw' => 'северо-западное',

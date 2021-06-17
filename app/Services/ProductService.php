@@ -22,6 +22,7 @@ class ProductService
         $validated = $request->validated();
         $product = $this->getById($id);
         $product->update($validated);
+
         return $product;
     }
 }
